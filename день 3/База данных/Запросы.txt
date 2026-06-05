@@ -1,0 +1,29 @@
+SELECT user_id, username, email, full_name, phone, role, registration_date, is_active FROM Users ORDER BY user_id;
+GO
+
+SELECT user_id, full_name, email, registration_date, DATEDIFF(DAY, registration_date, GETDATE()) AS DaysSinceRegistration FROM Users WHERE DATEDIFF(DAY, registration_date, GETDATE()) > 30 ORDER BY registration_date;
+GO
+
+SELECT course_id, title, difficulty, price, duration_hours, description FROM Courses WHERE category = 'Кибербезопасность' ORDER BY difficulty, price;
+GO
+
+SELECT TOP 10 c.comment_id, u.full_name, cr.title, c.comment_text, c.rating, c.created_at FROM Comments c JOIN Users u ON c.user_id = u.user_id JOIN Courses cr ON c.course_id = cr.course_id ORDER BY c.created_at DESC;
+GO
+
+SELECT COUNT(*) AS TotalUsers, SUM(CASE WHEN role = 'student' THEN 1 ELSE 0 END) AS Students, SUM(CASE WHEN role = 'instructor' THEN 1 ELSE 0 END) AS Instructors, SUM(CASE WHEN role = 'admin' THEN 1 ELSE 0 END) AS Admins, SUM(CASE WHEN is_active = 1 THEN 1 ELSE 0 END) AS ActiveUsers FROM Users;
+GO
+
+SELECT c.course_id, c.title, c.category, COUNT(com.comment_id) AS CommentCount, AVG(CAST(com.rating AS FLOAT)) AS AvgRating FROM Courses c LEFT JOIN Comments com ON c.course_id = com.course_id GROUP BY c.course_id, c.title, c.category ORDER BY CommentCount DESC;
+GO
+
+SELECT TOP 1 c.course_id, c.title, c.category, c.price, COUNT(com.comment_id) AS CommentCount, AVG(CAST(com.rating AS FLOAT)) AS AvgRating FROM Courses c LEFT JOIN Comments com ON c.course_id = com.course_id GROUP BY c.course_id, c.title, c.category, c.price ORDER BY CommentCount DESC;
+GO
+
+SELECT user_id, username, full_name, email, role, registration_date FROM Users ORDER BY registration_date DESC;
+GO
+
+SELECT c.course_id, c.title, c.category, COUNT(com.comment_id) AS RatingCount, AVG(CAST(com.rating AS FLOAT)) AS AvgRating, MIN(com.rating) AS MinRating, MAX(com.rating) AS MaxRating FROM Courses c LEFT JOIN Comments com ON c.course_id = com.course_id GROUP BY c.course_id, c.title, c.category HAVING COUNT(com.comment_id) > 0 ORDER BY AvgRating DESC;
+GO
+
+SELECT TOP 5 c.course_id, c.title, c.category, c.difficulty, c.price, COUNT(com.comment_id) AS CommentCount, AVG(CAST(com.rating AS FLOAT)) AS AvgRating, MAX(com.created_at) AS LastComment FROM Courses c LEFT JOIN Comments com ON c.course_id = com.course_id GROUP BY c.course_id, c.title, c.category, c.difficulty, c.price ORDER BY CommentCount DESC;
+GO
