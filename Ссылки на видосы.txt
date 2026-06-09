@@ -1,0 +1,7 @@
+Нейронка: https://drive.google.com/file/d/1T7TnHk3q3118yhp6q7CQBffHCDnyOWQR/view?usp=drive_link
+Свой: https://drive.google.com/file/d/10jxBcOXvguuXCw98quDmR-dtYz_McVx_/view?usp=drive_link
+00:00 - Вступление
+00:10 - Пример адресной строки
+00:21 - Что такое HTTPS?
+00:38 - Пример безопасного сайта
+00:49 - Пример опасного сайта
