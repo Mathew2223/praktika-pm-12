@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Видео-уроки - SOCURA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header__inner">
+            <div class="logo">
+                <img src="img/logo.png" alt="SOCURA" width="60" height="40">
+            </div>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link">← На главную</a></li>
+                    <li><a href="#lessons" class="nav__link">Уроки</a></li>
+                </ul>
+            </nav>
+            <div class="header__buttons">
+                <a href="index.html" class="btn btn--outline">Выйти</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="lessons" class="lessons section">
+            <div class="container">
+                <h1 class="lessons__title">Видео-уроки Consura</h1>
+                
+                <div class="lessons__wrapper">
+                    <div class="video-player">
+                        <div class="video-player__screen">
+                            <video id="video1" class="lesson-video" controls>
+                                <source src="video/lesson1.mp4" type="video/mp4">
+                                Ваш браузер не поддерживает видео.
+                            </video>
+
+                            <video id="video2" class="lesson-video" controls style="display: none;">
+                                <source src="video/lesson2.mp4" type="video/mp4">
+                                Ваш браузер не поддерживает видео.
+                            </video>
+
+                            <div id="video3" class="lesson-video audio-container" style="display: none;">
+                                <div class="audio-icon">🎧</div>
+                                <h3 class="audio-title">Подкаст: Настройки приватности</h3>
+                                <audio controls>
+                                    <source src="video/lesson3.mp3" type="audio/mpeg">
+                                    Ваш браузер не поддерживает аудио.
+                                </audio>
+                            </div>
+
+                            <div id="video4" class="lesson-video audio-container" style="display: none;">
+                                <div class="audio-icon">🎧</div>
+                                <h3 class="audio-title">Подкаст: Регистрация в соцсетях</h3>
+                                <audio controls>
+                                    <source src="video/lesson4.mp3" type="audio/mpeg">
+                                    Ваш браузер не поддерживает аудио.
+                                </audio>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lessons__info">
+                        <h2 class="lessons__subtitle" id="lessonTitle">Урок 1: Введение</h2>
+                        <p class="lessons__description" id="lessonDescription">
+                            В этом уроке вы познакомитесь с основами безопасности в социальных сетях.
+                        </p>
+                        <button class="btn btn--complete" id="markComplete" onclick="markAsComplete()">Отметить как пройденный</button>
+                    </div>
+
+                    <div class="lessons__list">
+                        <h3 class="lessons__list-title">Список уроков</h3>
+                        
+                        <div class="lesson-item lesson-item--active" data-lesson="1" onclick="selectLesson(1)">
+                            <div class="lesson-item__number">1</div>
+                            <div class="lesson-item__info">
+                                <h4 class="lesson-item__title">Введение</h4>
+                                <span class="lesson-item__time">15 мин</span>
+                            </div>
+                            <div class="lesson-item__check">✓</div>
+                        </div>
+
+                        <div class="lesson-item" data-lesson="2" onclick="selectLesson(2)">
+                            <div class="lesson-item__number">2</div>
+                            <div class="lesson-item__info">
+                                <h4 class="lesson-item__title">Безопасность в сети Интернет</h4>
+                                <span class="lesson-item__time">25 мин</span>
+                            </div>
+                            <div class="lesson-item__check">✓</div>
+                        </div>
+
+                        <div class="lesson-item" data-lesson="3" onclick="selectLesson(3)">
+                            <div class="lesson-item__number">3</div>
+                            <div class="lesson-item__info">
+                                <h4 class="lesson-item__title">Настройки приватности</h4>
+                                <span class="lesson-item__time">30 мин</span>
+                            </div>
+                            <div class="lesson-item__check">✓</div>
+                        </div>
+
+                        <div class="lesson-item" data-lesson="4" onclick="selectLesson(4)">
+                            <div class="lesson-item__number">4</div>
+                            <div class="lesson-item__info">
+                                <h4 class="lesson-item__title">Регистрация в социальных сетях</h4>
+                                <span class="lesson-item__time">50 мин</span>
+                            </div>
+                            <div class="lesson-item__check">✓</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer__inner">
+            <div class="footer__contacts">
+                <p>Телефон: +7 (495)123-45-67 | Email: info@socura.ru</p>
+            </div>
+            <div class="footer__socials">
+                <a href="#" class="social-link">
+                    <img src="img/vk.png" alt="VK" width="32" height="32">
+                </a>
+                <a href="#" class="social-link">
+                    <img src="img/telegram.png" alt="Telegram" width="32" height="32">
+                </a>
+                <a href="#" class="social-link">
+                    <img src="img/max.png" alt="OK" width="32" height="32">
+                </a>
+            </div>
+        </div>
+        <div class="container footer__copyright">
+            <p>© 2026 SOCURA. Все права защищены</p>
+        </div>
+    </footer>
+
+    <script>
+        // Данные уроков
+        const lessonsData = {
+            1: {
+                title: 'Урок 1: Введение',
+                description: 'В этом уроке вы познакомитесь с основами безопасности в социальных сетях и узнаете, почему защита личных данных так важна.'
+            },
+            2: {
+                title: 'Урок 2: Безопасность в сети Интернет',
+                description: 'Изучим основные угрозы в интернете и способы защиты от них. Рассмотрим фишинг, вредоносное ПО и другие опасности.'
+            },
+            3: {
+                title: 'Урок 3: Настройка приватности в социальных сетях',
+                description: 'В этом уроке разберем как скрыть личную информацию и настроить видимость профиля в сети Интернет.'
+            },
+            4: {
+                title: 'Урок 4: Регистрация в социальных сетях',
+                description: 'Научимся правильно регистрироваться в социальных сетях, создавая надежные пароли и настраивая двухфакторную аутентификацию.'
+            }
+        };
+
+        let currentLesson = 1;
+
+        // Выбор урока
+        function selectLesson(lessonNum) {
+            currentLesson = lessonNum;
+            
+            // Скрываем все видео/аудио
+            document.querySelectorAll('.lesson-video').forEach(video => {
+                video.style.display = 'none';
+                // Останавливаем воспроизведение
+                const videoEl = video.querySelector('video');
+                const audioEl = video.querySelector('audio');
+                if (videoEl) videoEl.pause();
+                if (audioEl) audioEl.pause();
+            });
+            
+            // Показываем текущий урок
+            const currentVideo = document.getElementById('video' + lessonNum);
+            if (currentVideo) {
+                currentVideo.style.display = lessonNum >= 3 ? 'flex' : 'block';
+            }
+            
+            // Обновляем активный урок
+            document.querySelectorAll('.lesson-item').forEach(item => {
+                item.classList.remove('lesson-item--active');
+            });
+            document.querySelector(`[data-lesson="${lessonNum}"]`).classList.add('lesson-item--active');
+            
+            // Обновляем информацию
+            const lesson = lessonsData[lessonNum];
+            document.getElementById('lessonTitle').textContent = lesson.title;
+            document.getElementById('lessonDescription').textContent = lesson.description;
+            
+            // Проверяем, пройден ли урок
+            const isCompleted = localStorage.getItem('lessonComplete_' + lessonNum) === 'true';
+            updateCompleteButton(isCompleted);
+        }
+
+        // Обновление кнопки "Пройден"
+        function updateCompleteButton(isCompleted) {
+            const btn = document.getElementById('markComplete');
+            if (isCompleted) {
+                btn.classList.add('btn--completed');
+                btn.disabled = true;
+                btn.textContent = '✓ Пройдено';
+            } else {
+                btn.classList.remove('btn--completed');
+                btn.disabled = false;
+                btn.textContent = 'Отметить как пройденный';
+            }
+        }
+
+        // Отметить как пройденный
+        function markAsComplete() {
+            localStorage.setItem('lessonComplete_' + currentLesson, 'true');
+            
+            const lessonItem = document.querySelector(`[data-lesson="${currentLesson}"]`);
+            lessonItem.classList.add('lesson-item--completed');
+            
+            updateCompleteButton(true);
+        }
+
+        // Восстановление прогресса при загрузке
+        window.addEventListener('load', function() {
+            for (let i = 1; i <= 4; i++) {
+                if (localStorage.getItem('lessonComplete_' + i) === 'true') {
+                    const lessonItem = document.querySelector(`[data-lesson="${i}"]`);
+                    lessonItem.classList.add('lesson-item--completed');
+                }
+            }
+            
+            updateCompleteButton(localStorage.getItem('lessonComplete_1') === 'true');
+        });
+    </script>
+
+</body>
+</html>

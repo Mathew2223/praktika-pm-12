@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация - SOCURA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header__inner">
+            <div class="logo">
+                <img src="img/logo.png" alt="SOCURA" width="60" height="40">
+            </div>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link">← На главную</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="registration section">
+            <div class="container">
+                <div class="forms__wrapper">
+                    <!-- Форма регистрации -->
+                    <div class="form-card" id="registerCard">
+                        <h2 class="form-card__title">Регистрация</h2>
+                        <form class="form" id="registerForm">
+                            <div class="form__group">
+                                <label class="form__label">Email</label>
+                                <input type="email" class="form__input" id="regEmail" placeholder="your@email.com" required>
+                            </div>
+                            <div class="form__group">
+                                <label class="form__label">Пароль</label>
+                                <input type="password" class="form__input" id="regPassword" placeholder="••••••••" required minlength="6">
+                            </div>
+                            <div class="form__group">
+                                <label class="form__label">Повторите пароль</label>
+                                <input type="password" class="form__input" id="regPasswordConfirm" placeholder="••••••••" required>
+                            </div>
+                            <button type="submit" class="btn btn--orange btn--full">Зарегистрироваться</button>
+                            <p class="form__text">Уже есть аккаунт? <a href="#" class="form__link" onclick="showLogin(); return false;">Войти</a></p>
+                        </form>
+                    </div>
+
+                    <!-- Форма входа (скрыта) -->
+                    <div class="form-card" id="loginCard" style="display: none;">
+                        <h2 class="form-card__title">Вход</h2>
+                        <form class="form" id="loginForm">
+                            <div class="form__group">
+                                <label class="form__label">Email</label>
+                                <input type="email" class="form__input" id="loginEmail" placeholder="your@email.com" required>
+                            </div>
+                            <div class="form__group">
+                                <label class="form__label">Пароль</label>
+                                <input type="password" class="form__input" id="loginPassword" placeholder="••••••••" required>
+                            </div>
+                            <button type="submit" class="btn btn--orange btn--full">Войти</button>
+                            <p class="form__text">Нет аккаунта? <a href="#" class="form__link" onclick="showRegister(); return false;">Зарегистрироваться</a></p>
+                        </form>
+                    </div>
+
+                    <!-- Форма обратной связи -->
+                    <div class="form-card">
+                        <h2 class="form-card__title">Обратная связь</h2>
+                        <form class="form" id="contactForm">
+                            <div class="form__group">
+                                <label class="form__label">Имя</label>
+                                <input type="text" class="form__input" placeholder="Ваше имя" required>
+                            </div>
+                            <div class="form__group">
+                                <label class="form__label">Телефон</label>
+                                <input type="tel" class="form__input" placeholder="+7 (___) ___-__-__" required>
+                            </div>
+                            <button type="submit" class="btn btn--orange btn--full">Отправить сообщение</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contacts" class="footer">
+        <div class="container footer__inner">
+            <div class="footer__contacts">
+                <p>Телефон: +7 (495)123-45-67 | Email: info@socura.ru</p>
+            </div>
+            <div class="footer__socials">
+                <a href="#" class="social-link">
+                    <img src="img/vk.png" alt="VK" width="32" height="32">
+                </a>
+                <a href="#" class="social-link">
+                    <img src="img/telegram.png" alt="Telegram" width="32" height="32">
+                </a>
+                <a href="#" class="social-link">
+                    <img src="img/max.png" alt="OK" width="32" height="32">
+                </a>
+            </div>
+        </div>
+        <div class="container footer__copyright">
+            <p>© 2026 SOCURA. Все права защищены</p>
+        </div>
+    </footer>
+
+    <script>
+        // Переключение между входом и регистрацией
+        function showLogin() {
+            document.getElementById('registerCard').style.display = 'none';
+            document.getElementById('loginCard').style.display = 'block';
+        }
+
+        function showRegister() {
+            document.getElementById('loginCard').style.display = 'none';
+            document.getElementById('registerCard').style.display = 'block';
+        }
+
+        // Обработка формы регистрации
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const passwordConfirm = document.getElementById('regPasswordConfirm').value;
+
+            if (password !== passwordConfirm) {
+                alert('Пароли не совпадают!');
+                return;
+            }
+
+            // Сохраняем пользователя
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userPassword', password);
+            localStorage.setItem('isLoggedIn', 'true');
+
+            // Перенаправляем на lessons.html
+            window.location.href = 'lessons.html';
+        });
+
+        // Обработка формы входа
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            const savedEmail = localStorage.getItem('userEmail');
+            const savedPassword = localStorage.getItem('userPassword');
+
+            if (email === savedEmail && password === savedPassword) {
+                localStorage.setItem('isLoggedIn', 'true');
+                window.location.href = 'lessons.html';
+            } else {
+                alert('Неверный email или пароль!');
+            }
+        });
+
+        // Обработка формы обратной связи
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Сообщение отправлено! Мы свяжемся с вами в ближайшее время.');
+            this.reset();
+        });
+    </script>
+
+</body>
+</html>
